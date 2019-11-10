@@ -1,0 +1,193 @@
+Journal
+
+Enseignant: PADOVANI Vincent
+Groupe 1 du Lundi 13h30-15h30
+
+Etudiants: IHAINJANAHARY Lalarindriana, AOUESSAR Oussama, AREZES Mike
+
+********************************************************************************************
+
+Lundi 25 Janvier:
+
+Objectif: S'inscrire et apprendre à utiliser git
+
+Difficultés rencontrées:
+    Mike et Oussama ont rencontré des problèmes dans l'installation d'ubuntu (kubuntu),
+    avant même de pouvoir utiliser git.
+    Pour être plus précis, Mike avait déjà installé kubuntu sur un disque dur externe mais
+    durant la prériode de noël/nouvel an, son disque dur externe a cessé de fonctionner et
+    a donc dû en urgence en racheter un pour refaire l'installation, cependant il s'est
+    retrouvé confronté à des difficultés qu'il n'avait pas eu avec le disque dur externe
+    précédent. Pour Oussama, ubuntu était installé sur une machine virtuelle, mais malgré
+    tout les tutoriels présents sur internet il n'y a rien qui a fonctionné pour mettre
+    la fenêtre plus grande que 10cm sur 6cm.
+    Comme Lalarindriana a un netbook de l'université, il n'y avait pas de problèmes de ce 
+    côté et elle s'est donc chargé des inscriptions, de la création des groupes et du 
+    projet dans le git.
+
+-------------------------------------
+
+Lundi 1er Février:
+
+Objectif: Découvrir libxml et le langage xml, et SDL
+
+Difficultés rencontrées:
+    Lala a rencontré des problèmes dans la connexion entre son netbook et le git
+    qui lui demandait un mot de passe qu'elle n'avait pas. Malgré les tentatives de tout les
+    membres du groupe et de Mr PADOVANI, nous n'avons pas été capable de résoudre ce problème.
+    On a donc créer un nouveau projet au nom de Mike.
+
+-------------------------------------
+
+Lundi 8 Février:
+
+Objectif: 
+    -> prendre connaissance des codes et des documents postés par les binômes
+    -> objectif suggéré par l'enseignant de TP:
+       - récuperer tous les chemins d'un document XML
+       - essayer d'afficher des points sur une fenêtre via SDL
+    -> objectif personnel du groupe:
+        Se familiariser avec SDL, XML
+          - SDL:
+                - création de fenêtre
+                - déssiner des éléments
+          - XML:
+                - récuperer les noeuds constituants un chemin avec un id donné en argument ou
+                    des caractéristiques particuliers
+                    
+                    par exemple:
+                    
+                        <way id="...." visible="...." tag="highway" ...... />
+                            <nd ref= ..... />
+                            < ....... />
+                            ...
+                    
+                    but: récuperer les noeuds du way id="128245678" et tag="highway",
+                            non pas les autres way qui n'ont pas ses propriétés là.
+----------------------------------------------
+LUNDI 15 Fevrier:
+
+Objectifs: 
+- écrire un programme qui permet de récupérer tous les points (= nœuds) qui sont liés à une balise way précisée par son id ou son tag (1)
+
+- obtenir les coordonnées Gps de tous les points d'un map osm (2)
+
+Ce qui a été fait:
+- récupérer les nœuds qui constituent un way défini par son id et/ou way (1).
+   utilisation de Xpath pour récupérer les informations qui nous intéressent dans une balise paticulière (ici way)
+   ex : /osm/way[@id = ' 3243535355'/nd
+     ou /osm/way[@id = ' 3243535355'/tag
+   référence au programme : xpath.c
+
+- récupérer tous les nœuds les latitudes et les longitudes de tous les nœuds d'un map.osm
+  référence au programme : get_noeudsGPS.c
+
+----------------------------------------------
+
+LUNDI 22 Fevrier:
+
+Objectifs:
+-tester nos fonctions de dessin sur un exemple de map réel.
+
+-lire des données et les dessiner.
+
+-voir comment on peut faire un téléchargement à la volée de fichiers.xml
+   but : avoir une bibliothèque de cartes .osm disponible que ça soit pour tester l'application sur différentes données
+
+-Se renseigner sur la conception d'une interface graphique (en dehors du rendu de carte) pour un support de l'application
+
+-Se renseigner sur les structures de données pour stocker les informations sur les nœuds par exemple
+
+   ---> Objectif personnel du groupe:
+   	***//SDL:
+		->Dessiner des elements a partir d'une map réel:
+			**pour l'instants on arrive a dessiner des carrés et des lignes, on a aussi fait une animation de sorte qu'on peut voir comment les elements se dessine.
+		->Definir l'echelle de la zone de dessin:
+			**On vient de se rendre compte qu'on peut recuperer les extremités de la map du fichier XML, donc on a plus besoin de fonctions de calcules des bordures.
+		->Conversion des latitudes/longitudes en pixel:
+			 **On a pas encore trouver la bonne formule pour convertire les lat' et long' en pixels par rapport a notre echelle mais sinon on utilise la formule basique ou on prend les 4 points d'extremités de la zone et on dessine par rapport a ses 4 points.
+
+Remarques:
+Les objectifs de la semaine du 22/02/15
+→ n'ont pas été atteints du coté du parseur xml car nous étions à la recherche de structure de données pour stocker les données (nœuds,way,etc.. ) du fichier .xml. Nous avons plutôt revu les structures de données en langage C et relu les documentations concernant cela.
+
+------------------------------------------------
+LUNDI 29 fevrier : 
+
+Les objectifs:
+→ au niveau du traitement de fichier xml : on garde les mêmes objectifs que la semaine du 22/02/15
+( un moyen de récupérer les nœuds/ways et pouvoir les stocker )
+
+
+Ce qui a été fait:
+-> documentation sur GLib : permettant de créer des hash map comme en java pour pouvoir stocker les donnees 
+( petit programme test manipulation réalisé : nommé listes.c dans le rep tests )
+
+--------------------------------------------------
+LUNDI 7 mars :
+
+Les objectifs:
+(au niveau du parseur)
+-> creation de la structure Map permettant de stocker toutes les informations présentes dans le fichier xml.
+
+Ce qui a été fait:
+-> La structure Map a bien été mis en place. Elle contient entre autre les champs nodes et ways qui sont censés stocker les informations retrouvées dans leurs balises respectives. 
+Mise en place de la méthode des parcours des noeuds tout en récupérant les informartions nécessaires. 
+
+
+
+----------------------------------------------------
+Lundi 14 mars : 
+
+Les objectifs:
+(au niveau du parseur)
+-> débuguer le parseur.c
+
+Ce qui a été fait
+-> Le parseur.c s'éxécute "convenablement" sur map.osm (relativement petit) mais il va falloir effectuer d'autres tests sur
+ d'autres fichiers .osm 
+
+
+----------------------------------------------------
+Lundi 21 mars:
+
+Les objectifs:
+(au niveau du parseur)
+-> Mettre en lien avec le code SDL qui permet d'effectuer les dessins. 
+-> Opter pour une méthode de parcours plus optimisé car lorsqu'on teste le parseur sur d'autres cartes plus grandes, il y a tout de même un temps d'éxécution "considérable".
+
+Ce qui a été fait:
+-> Résolution du bug rencontré
+-------------------------------------------------------
+Lundi 28 mars :
+Les objectifs :
+(au niveau du parseur)
+-> perfectionnement du parseur en réoragnisant bien le code
+
+ce qui a été fait:
+-> bug tout à fait réglé à propos du parseur
+-------------------------------------------------------
+Lundi 4 avril:
+
+ce qui a été fait:
+-> parseur tout à fait opérationnel
+
+Les objectifs:
+-> avancer au plus dans la realisation du projet minimal:
+	- trouver formule pour convertir les coordonnées GPS en mètre (distance par rapport à l'équateur)
+	- trouver la formule de la projection (Mercator)
+	- premiers rendus tests à partir des exemples fournis sur Didel
+
+---------------------------------------------------
+Lundi 11 Avril:
+
+ce qui a été fait:
+-> Nous avons réussi a dessiner dans la fenêtre sdl
+
+Les objectifs:
+-> Corriger la taille des routes en fonction de la taille de la carte
+-> Corriger la couleur
+-> Ajouter les plages, montagne, jardin, et périphérique
+
+
+

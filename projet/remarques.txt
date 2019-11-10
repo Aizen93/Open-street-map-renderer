@@ -1,0 +1,40 @@
+
+On a déclarer ici dans parseur.c une map dans le main: 
+	Map *map = malloc(sizeof(Map));
+Là où on a mis cette ligne, on peut écrire les lignes suivantes!
+
+**************************************************************************************************************
+Pour accéder aux attributs de bounds :
+	map->bounds.minlat
+	map->bounds.minlon
+	map->bounds.maxlat
+	map->bounds.maxlon
+**************************************************************************************************************
+Pour accéder a un node de la structure map, il faut se munir de son id:
+	exemple : id = "345362564226" (je viens de l'inventer! :) )
+	
+	Puis on déclare,
+	Node *n = g_hash_table_lookup(map->nodes, id)
+	
+	pour acceder à ses attributs:
+	printf(lat: "%f, lon: %\n", n->lat,n->lon)
+***************************************************************************************************************
+Pour accéder a un way de la structure map,de meme, il faut aussi se munir de son id:
+	exemple: id = "3355368999" (je viens encore de l'inventer! )
+
+	Puis on déclare,
+	Way *w = g_hash_table_lookup(map->ways, id)
+
+	pour accéder à ses attributs (id,visible,etc...)
+	printf("%s\n",w->id)
+
+	pour accéder au i-ième élément de la liste des références de noeuds, faire par exemple:
+	char *reference = (char *) g_list_nth_data (w->nd,i)
+
+	Pour accéder à la valeur d'un tag du way il faut se munir de son type (i.e de la clé):
+	Ce type peut etre: highway,building, etc
+
+	soit key -> de type char *        (exemple : "highway")
+
+	char * value = (char *) g_hash_table_lookup (w->tag,key) 
+	(ou selon l'exemple) -> char * value = (char *) g_hash_table_lookup (w->tag,"highway")
